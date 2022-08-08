@@ -199,3 +199,5 @@
 }
 
 -keep class com.github.catvod.crawler.*{*;}
+# 迅雷下载模块(磁链)
+-keep class com.xunlei.downloadlib.** {*;}
