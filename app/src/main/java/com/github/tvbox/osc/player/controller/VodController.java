@@ -102,7 +102,7 @@ public class VodController extends BaseController {
     
     Handler myHandle;
     Runnable myRunnable;
-    int myHandleSeconds = 5000;//闲置多少毫秒秒关闭底栏  默认5秒    
+    int myHandleSeconds = 8000;//闲置8秒关闭底栏    
 
     @Override
     protected void initView() {
