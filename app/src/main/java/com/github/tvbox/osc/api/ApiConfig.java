@@ -241,6 +241,7 @@ public class ApiConfig {
             sb.setFilterable(DefaultConfig.safeJsonInt(obj, "filterable", 1));
             sb.setPlayerUrl(DefaultConfig.safeJsonString(obj, "playUrl", ""));
             sb.setExt(DefaultConfig.safeJsonString(obj, "ext", ""));
+            sb.setJar(DefaultConfig.safeJsonString(obj, "jar", ""));            
             sb.setCategories(DefaultConfig.safeJsonStringList(obj, "categories"));
             if (firstSite == null)
                 firstSite = sb;
@@ -391,7 +392,7 @@ public class ApiConfig {
     }
 
     public Spider getCSP(SourceBean sourceBean) {
-        return jarLoader.getSpider(sourceBean.getKey(), sourceBean.getApi(), sourceBean.getExt());
+        return jarLoader.getSpider(sourceBean.getKey(), sourceBean.getApi(), sourceBean.getExt(), sourceBean.getJar());
     }
 
     public Object[] proxyLocal(Map param) {
