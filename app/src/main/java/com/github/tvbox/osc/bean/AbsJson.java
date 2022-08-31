@@ -107,7 +107,8 @@ public class AbsJson implements Serializable {
 
         public Movie.Video toXmlVideo() {
             Movie.Video video = new Movie.Video();
-            video.last = vod_time;
+            video.tag = vod_tag;
+			video.last = vod_time;
             video.id = vod_id;
             video.tid = type_id;
             video.name = vod_name;
