@@ -150,6 +150,8 @@ public class ApiConfig {
                         if (apiUrl.startsWith("clan")) {
                             result = clanContentFix(clanToAddress(apiUrl), result);
                         }
+                        //假相對路徑
+                        result = fixContentPath(apiUrl,result);
                         return result;
                     }
                 });
@@ -294,12 +296,17 @@ public class ApiConfig {
                 //clan
                 String extUrl = Uri.parse(url).getQueryParameter("ext");
                 if (extUrl != null && !extUrl.isEmpty()) {
-                    String extUrlFix = new String(Base64.decode(extUrl, Base64.DEFAULT | Base64.URL_SAFE | Base64.NO_WRAP), "UTF-8");
+                    String extUrlFix;
+                    if(extUrl.startsWith("http") || extUrl.startsWith("clan://")){
+                        extUrlFix = extUrl;
+                    }else {
+                        extUrlFix = new String(Base64.decode(extUrl, Base64.DEFAULT | Base64.URL_SAFE | Base64.NO_WRAP), "UTF-8");
+                    }
                     if (extUrlFix.startsWith("clan://")) {
                         extUrlFix = clanContentFix(clanToAddress(apiUrl), extUrlFix);
-                        extUrlFix = Base64.encodeToString(extUrlFix.getBytes("UTF-8"), Base64.DEFAULT | Base64.URL_SAFE | Base64.NO_WRAP);
-                        url = url.replace(extUrl, extUrlFix);
                     }
+                    extUrlFix = Base64.encodeToString(extUrlFix.getBytes("UTF-8"), Base64.DEFAULT | Base64.URL_SAFE | Base64.NO_WRAP);
+                    url = url.replace(extUrl, extUrlFix);
                 }
                 LiveChannelGroup liveChannelGroup = new LiveChannelGroup();
                 liveChannelGroup.setGroupName(url);
@@ -496,5 +503,16 @@ public class ApiConfig {
     String clanContentFix(String lanLink, String content) {
         String fix = lanLink.substring(0, lanLink.indexOf("/file/") + 6);
         return content.replace("clan://", fix);
+    }
+
+    String fixContentPath(String url, String content) {
+        if (content.contains("\"./")) {
+            if(!url.startsWith("http") && !url.startsWith("clan://")){
+                url = "http://" + url;
+            }
+            if(url.startsWith("clan://"))url=clanToAddress(url);
+            content = content.replace("./", url.substring(0,url.lastIndexOf("/") + 1));
+        }
+        return content;
     }
 }

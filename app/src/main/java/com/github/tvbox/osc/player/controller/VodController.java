@@ -195,6 +195,15 @@ public class VodController extends BaseController {
                 hideBottom();
             }
         });
+        // takagen99: Add long press to refresh (not from start)
+        mPlayerRetry.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                listener.replay(false);
+                hideBottom();
+                return true;
+            }
+        });
         mNextBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
