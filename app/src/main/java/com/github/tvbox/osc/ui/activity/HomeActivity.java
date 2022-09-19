@@ -200,14 +200,6 @@ public class HomeActivity extends BaseActivity {
                 return false;
             }
         });
-        tvName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dataInitOk = false;
-                jarInitOk = false;
-                showSiteSwitch();
-            }
-        });
         setLoadSir(this.contentLayout);
         //mHandler.postDelayed(mFindFocus, 500);
     }
