@@ -8,7 +8,7 @@
     android:ellipsize="end"
     android:focusable="true"
     android:gravity="center_vertical"
-    android:padding="@dimen/vs_8"
+    android:padding="@dimen/vs_6"
     android:singleLine="true"
     android:textColor="@color/color_FFFFFF"
-    android:textSize="@dimen/ts_24" />
+    android:textSize="@dimen/ts_20" />
