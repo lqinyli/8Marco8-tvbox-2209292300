@@ -157,6 +157,8 @@ public class DetailActivity extends BaseActivity {
                 if(firstReverse){
                     jumpToPlay();
                     firstReverse=false;
+                } else {
+                    jumpToPlay();
                 }
             }
         });
